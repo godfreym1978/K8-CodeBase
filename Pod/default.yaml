@@ -1,0 +1,16 @@
+#Created by Godfrey P Menezes. Feel free to use, change and share.
+#This creates a simpe Pod with nginx image that runs on 80 port.
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+      name: NGINX_PORT
