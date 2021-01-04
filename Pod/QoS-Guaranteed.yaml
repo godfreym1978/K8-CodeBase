@@ -1,11 +1,12 @@
 #Created by Godfrey P Menezes. Feel free to use, change and share.
 #This creates a simpe Pod with nginx image that runs on 80 port.
+#The Quality of Service is guaranteed with resources mentioned.
 apiVersion: v1
 kind: Pod
 metadata:
   labels:
     run: nginx
-  name: nginx-default
+  name: nginx-guaranteed
 spec:
   containers:
   - image: nginx
@@ -13,3 +14,7 @@ spec:
     ports:
     - containerPort: 80
       name: NGINX_PORT
+    resources:
+      requests:
+        cpu: "0.5"
+        memory: 100Mi
