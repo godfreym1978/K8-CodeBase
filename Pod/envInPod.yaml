@@ -1,0 +1,20 @@
+#Created by Godfrey P Menezes. Feel free to use, change and share.
+#This creates a simple Pod with nginx image that runs on 80 port. The pod creates an environment variable and assign the value
+#use the command to check the env USERID
+# kubectl exec nginx-env-in-pod -it -- prinenv
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx-env-in-pod
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    env:
+    - name: USERID
+      value: passedinyaml
+    ports:
+    - containerPort: 80
+      name: nginx-port

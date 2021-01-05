@@ -1,0 +1,34 @@
+#Created by Godfrey P Menezes. Feel free to use, change and share.
+#This creates a simple Pod with nginx image that runs on 80 port.
+#create the configmap cm-literal and then use it in Pod. The command is -
+# kubectl create cm cm-literal --from-literal=password=password --from-literal=username=godfrey
+#or the YAML as decribed in here
+apiVersion: v1
+data:
+  password: password
+  username: godfrey
+kind: ConfigMap
+metadata:
+  name: cm-literal
+  namespace: default
+---
+# The pod will have the USERNAME env and it can be checked as kubectl exec nginx-env-cmrefkey -it -- printenv
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx-env-cmkeyref
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    env:
+    - name: USERNAME 
+      valueFrom:
+        configMapKeyRef:
+          name: cm-literal 
+          key: username 
+    ports:
+    - containerPort: 80
+      name: nginx-port
