@@ -10,6 +10,9 @@ spec:
   containers:
   - image: nginx
     name: nginx
+    imagePullPolicy: IfNotPresent 
+    # Option for Always or :latest - https://kubernetes.io/docs/concepts/containers/images/#updating-images
+    # Option for IfNotPresent or Never - https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
     ports:
     - containerPort: 80
       name: nginx-port

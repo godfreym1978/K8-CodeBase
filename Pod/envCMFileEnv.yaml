@@ -1,0 +1,26 @@
+#Created by Godfrey P Menezes. Feel free to use, change and share.
+#This creates a simple Pod with nginx image that runs on 80 port. The Pod uses an environment file to populate env variables
+# use the following command to create the file env
+#kubectl create cm cm-env --from-env-file=file.env 
+# the contents of file.env are - var1=val1
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx-cm-env-file
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    env:
+    - name: USERID
+      value: passedinyaml
+    ports:
+    - containerPort: 80
+      name: nginx-port
+    envFrom:
+    - configMapRef:
+        name: cm-env

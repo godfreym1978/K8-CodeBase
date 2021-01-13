@@ -1,0 +1,23 @@
+#Created by Godfrey P Menezes. Feel free to use, change and share.
+#This creates a simple Pod with nginx image that runs on 80 port. The Pod uses ephemeral volume that lasts the life time of the Pod.
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx-emptydir
+  namespace: default
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: empty-dir
+  volumes:
+  - name: empty-dir
+    emptyDir: {}

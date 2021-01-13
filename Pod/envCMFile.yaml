@@ -1,0 +1,26 @@
+#Created by Godfrey P Menezes. Feel free to use, change and share.
+#This creates a simple Pod with nginx image that runs on 80 port. The Pod uses a file 
+# use the following command to create the file env
+#kubectl create cm cm-file --from-file=config.txt
+# These are ideal when we need to include the config file directly inside the pod instead of using setting singular values.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx-cm-file
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+      name: nginx-port
+    volumeMounts:
+    - name: cm-file
+      mountPath: /tmp/file
+  volumes:
+  - name: cm-file
+    configMap:
+      name: cm-file
